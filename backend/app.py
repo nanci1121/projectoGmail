@@ -65,12 +65,13 @@ async def download_progress(label_id: str = None):
             msg = gmail_manager.get_message_details(message["id"])
             files = downloader._process_payload(msg["payload"], message["id"], download_dir)
             
-            yield f"data: {json.dumps({
+            progress_data = {
                 'type': 'progress', 
                 'current': i + 1, 
                 'total': total, 
                 'files': files
-            })}\n\n"
+            }
+            yield f"data: {json.dumps(progress_data)}\n\n"
             # Un pequeño delay para que la interfaz se vea fluida
             await asyncio.sleep(0.1)
 
