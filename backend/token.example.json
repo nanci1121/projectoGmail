@@ -1,0 +1,11 @@
+{
+    "token": "TU_ACCESS_TOKEN",
+    "refresh_token": "TU_REFRESH_TOKEN",
+    "token_uri": "https://oauth2.googleapis.com/token",
+    "client_id": "TU_CLIENT_ID.apps.googleusercontent.com",
+    "client_secret": "TU_CLIENT_SECRET",
+    "scopes": [
+        "https://www.googleapis.com/auth/gmail.readonly"
+    ],
+    "expiry": "2025-12-24T12:00:00.000000Z"
+}

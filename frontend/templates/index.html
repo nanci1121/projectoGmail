@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail Downloader | Premium UI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="logo">
+                <i class="fas fa-file-download"></i>
+                <span>GMAIL DOWNLOADER</span>
+            </div>
+
+            <p class="label-title">Etiquetas / Carpetas</p>
+            <ul id="label-list">
+                <li class="active" data-id="0">
+                    <i class="fas fa-mail-bulk"></i> Todos los correos
+                </li>
+                <!-- Se llenará dinámicamente -->
+            </ul>
+
+            <div style="margin-top: auto; padding-top: 20px; border-top: 1px solid var(--glass-border);">
+                <button id="logout-btn"
+                    style="background: none; border: none; color: var(--text-muted); cursor: pointer; display: flex; align-items: center; gap: 10px; font-size: 0.9rem; transition: color 0.3s;">
+                    <i class="fas fa-user-friends"></i> Cambiar de cuenta
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="header">
+                <h1>Hola, Venancio</h1>
+                <p>Gestiona y descarga tus archivos adjuntos de forma sencilla.</p>
+            </div>
+
+            <div class="action-card">
+                <p style="margin-bottom: 20px;">Has seleccionado: <strong id="selected-label-text">Todos los
+                        correos</strong></p>
+                <div style="display: flex; gap: 10px; justify-content: center;">
+                    <button id="start-btn" class="btn-download">
+                        <i class="fas fa-cloud-download-alt" style="margin-right: 10px;"></i>
+                        Iniciar Descarga
+                    </button>
+                    <button id="stop-btn" class="btn-stop" style="display: none;">
+                        <i class="fas fa-stop-circle" style="margin-right: 10px;"></i>
+                        Detener
+                    </button>
+                </div>
+            </div>
+
+            <div class="status-section">
+                <!-- Barra de Progreso -->
+                <div id="progress-container" class="progress-container">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+                        <span id="progress-text" style="font-size: 0.9rem;">Preparando...</span>
+                        <span id="percent-text" style="font-weight: 600; color: var(--primary);">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progress-fill" class="progress-fill"></div>
+                    </div>
+                </div>
+
+                <!-- Lista de archivos -->
+                <p class="label-title" style="margin-top: 20px;">Actividad Reciente</p>
+                <ul id="file-list" class="file-list">
+                    <!-- Ejemplo de item -->
+                    <div id="no-activity" style="text-align: center; color: var(--text-muted); padding: 40px;">
+                        <i class="fas fa-history"
+                            style="font-size: 2rem; display: block; margin-bottom: 10px; opacity: 0.3;"></i>
+                        No hay actividad reciente
+                    </div>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+</body>
+
+</html>

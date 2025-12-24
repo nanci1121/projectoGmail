@@ -1,0 +1,10 @@
+google-api-python-client
+google-auth-httplib2
+google-auth-oauthlib
+python-dotenv
+fastapi
+uvicorn
+jinja2
+pytest
+httpx
+pytest-asyncio
