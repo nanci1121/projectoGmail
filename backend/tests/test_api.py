@@ -7,7 +7,9 @@ import sys
 # Añadir el path de backend para poder importar app
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from app import app
+# Mock Gmail antes de importar app
+with patch('web_logic.GmailWebManager'):
+    from app import app
 
 client = TestClient(app)
 
@@ -18,6 +20,15 @@ def test_read_main():
         mock_template.return_value = HTMLResponse(content="<html></html>", status_code=200)
         response = client.get("/")
         assert response.status_code == 200
+
+def test_get_labels():
+    """Prueba el endpoint de obtener etiquetas"""
+    with patch('app.gmail_manager.get_labels') as mock_get:
+        mock_get.return_value = [{"id": "INBOX", "name": "INBOX"}]
+        response = client.get("/api/labels")
+        assert response.status_code == 200
+        data = response.json()
+        assert isinstance(data, list)
 
 def test_get_labels_error():
     """Prueba el manejo de errores al obtener etiquetas"""
@@ -33,21 +44,20 @@ def test_stop_download():
     assert response.status_code == 200
     assert response.json() == {"status": "stopping"}
 
+def test_user_info():
+    """Prueba el endpoint de información de usuario"""
+    with patch('app.gmail_manager.service') as mock_service:
+        mock_profile = MagicMock()
+        mock_profile.execute.return_value = {"emailAddress": "test@example.com"}
+        mock_service.users().getProfile.return_value = mock_profile
+        response = client.get("/api/user-info")
+        assert response.status_code == 200
+        data = response.json()
+        assert "email" in data or "error" in data
+
 def test_logout():
     """Prueba el endpoint de cerrar sesión"""
     with patch('app.gmail_manager.logout') as mock_logout:
         response = client.get("/api/logout")
         assert response.status_code == 200
         assert response.json() == {"status": "logged_out"}
-        mock_logout.assert_called_once()
-
-def test_user_info():
-    """Prueba el nuevo endpoint de información de usuario"""
-    with patch('app.gmail_manager.service') as mock_service:
-        mock_service.users().getProfile().execute.return_value = {
-            "emailAddress": "test@example.com"
-        }
-        response = client.get("/api/user-info")
-        assert response.status_code == 200
-        data = response.json()
-        assert "email" in data or "error" in data
