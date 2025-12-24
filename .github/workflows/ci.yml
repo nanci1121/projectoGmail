@@ -24,7 +24,11 @@ jobs:
         pip install -r backend/requirements.txt
         
     - name: Run tests
+      env:
+        # Variables de entorno para evitar que los tests intenten autenticarse
+        GMAIL_CREDENTIALS_FILE: "credentials.example.json"
+        GMAIL_TOKEN_FILE: "token.example.json"
       run: |
         # Usamos PYTHONPATH para que encuentre los módulos en backend
         export PYTHONPATH=$PYTHONPATH:$(pwd)/backend
-        pytest backend/tests/
+        pytest backend/tests/ -v --tb=short
