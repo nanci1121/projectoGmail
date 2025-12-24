@@ -40,3 +40,14 @@ def test_logout():
         assert response.status_code == 200
         assert response.json() == {"status": "logged_out"}
         mock_logout.assert_called_once()
+
+def test_user_info():
+    """Prueba el nuevo endpoint de información de usuario"""
+    with patch('app.gmail_manager.service') as mock_service:
+        mock_service.users().getProfile().execute.return_value = {
+            "emailAddress": "test@example.com"
+        }
+        response = client.get("/api/user-info")
+        assert response.status_code == 200
+        data = response.json()
+        assert "email" in data or "error" in data

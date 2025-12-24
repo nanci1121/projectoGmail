@@ -83,6 +83,14 @@ async def stop_download():
     downloader.stop()
     return {"status": "stopping"}
 
+@app.get("/api/user-info")
+async def get_user_info():
+    try:
+        profile = gmail_manager.service.users().getProfile(userId="me").execute()
+        return {"email": profile.get("emailAddress", "Unknown")}
+    except Exception as e:
+        return {"error": str(e)}
+
 @app.get("/api/logout")
 async def logout():
     gmail_manager.logout()
