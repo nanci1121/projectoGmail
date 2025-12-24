@@ -6,6 +6,12 @@ Una aplicación web moderna y segura para descargar adjuntos de Gmail de forma v
 ![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.127.0-green.svg)
 
+## 📸 Vista Previa
+
+<p align="center">
+  <img src=".github/images/screenshot.png" alt="Gmail Downloader Interface" width="800">
+</p>
+
 ## ✨ Características
 
 - 🎨 **Interfaz Web Premium**: Diseño moderno con efectos glassmorphism y modo oscuro
